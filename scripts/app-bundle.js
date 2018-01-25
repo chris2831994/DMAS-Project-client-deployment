@@ -202,7 +202,7 @@ define('services/fixtures',['exports'], function (exports) {
     var Fixtures = function Fixtures() {
         _classCallCheck(this, Fixtures);
 
-        this.baseUrl = 'http://localhost:4001';
+        this.baseUrl = 'https://sheltered-atoll-65815.herokuapp.com/';
     };
 
     exports.default = Fixtures;
@@ -382,6 +382,39 @@ define('services/tweet-service',['exports', 'aurelia-framework', './fixtures', '
     }()) || _class);
     exports.default = TweetService;
 });
+define('viewmodels/globalTimeline/globalTimeline',["exports", "aurelia-framework", "../../services/tweet-service"], function (exports, _aureliaFramework, _tweetService) {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.GlobalTimeline = undefined;
+
+    var _tweetService2 = _interopRequireDefault(_tweetService);
+
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {
+            default: obj
+        };
+    }
+
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
+
+    var _dec, _class;
+
+    var GlobalTimeline = exports.GlobalTimeline = (_dec = (0, _aureliaFramework.inject)(_tweetService2.default), _dec(_class = function GlobalTimeline(ts) {
+        _classCallCheck(this, GlobalTimeline);
+
+        this.tweets = [];
+
+        this.tweetService = ts;
+        this.tweets = ts.tweets;
+    }) || _class);
+});
 define('viewmodels/login/login',['exports', 'aurelia-framework', '../../services/tweet-service'], function (exports, _aureliaFramework, _tweetService) {
   'use strict';
 
@@ -424,6 +457,38 @@ define('viewmodels/login/login',['exports', 'aurelia-framework', '../../services
     return Login;
   }()) || _class);
 });
+define('viewmodels/profile/profile',["exports", "aurelia-framework", "../../services/tweet-service"], function (exports, _aureliaFramework, _tweetService) {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    exports.Profile = undefined;
+
+    var _tweetService2 = _interopRequireDefault(_tweetService);
+
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {
+            default: obj
+        };
+    }
+
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
+
+    var _dec, _class;
+
+    var Profile = exports.Profile = (_dec = (0, _aureliaFramework.inject)(_tweetService2.default), _dec(_class = function Profile(ts) {
+        _classCallCheck(this, Profile);
+
+        this.user = null;
+
+        this.user = ts.user;
+    }) || _class);
+});
 define('viewmodels/logout/logout',['exports', '../../services/tweet-service', 'aurelia-framework'], function (exports, _tweetService, _aureliaFramework) {
   'use strict';
 
@@ -462,38 +527,6 @@ define('viewmodels/logout/logout',['exports', '../../services/tweet-service', 'a
 
     return Logout;
   }()) || _class);
-});
-define('viewmodels/profile/profile',["exports", "aurelia-framework", "../../services/tweet-service"], function (exports, _aureliaFramework, _tweetService) {
-    "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.Profile = undefined;
-
-    var _tweetService2 = _interopRequireDefault(_tweetService);
-
-    function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : {
-            default: obj
-        };
-    }
-
-    function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
-        }
-    }
-
-    var _dec, _class;
-
-    var Profile = exports.Profile = (_dec = (0, _aureliaFramework.inject)(_tweetService2.default), _dec(_class = function Profile(ts) {
-        _classCallCheck(this, Profile);
-
-        this.user = null;
-
-        this.user = ts.user;
-    }) || _class);
 });
 define('viewmodels/signup/signup',['exports', 'aurelia-framework', '../../services/tweet-service'], function (exports, _aureliaFramework, _tweetService) {
   'use strict';
@@ -592,46 +625,13 @@ define('viewmodels/tweet/tweet',["exports", "aurelia-framework", "../../services
         return Tweet;
     }()) || _class);
 });
-define('viewmodels/globalTimeline/globalTimeline',["exports", "aurelia-framework", "../../services/tweet-service"], function (exports, _aureliaFramework, _tweetService) {
-    "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.GlobalTimeline = undefined;
-
-    var _tweetService2 = _interopRequireDefault(_tweetService);
-
-    function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : {
-            default: obj
-        };
-    }
-
-    function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
-        }
-    }
-
-    var _dec, _class;
-
-    var GlobalTimeline = exports.GlobalTimeline = (_dec = (0, _aureliaFramework.inject)(_tweetService2.default), _dec(_class = function GlobalTimeline(ts) {
-        _classCallCheck(this, GlobalTimeline);
-
-        this.tweets = [];
-
-        this.tweetService = ts;
-        this.tweets = ts.tweets;
-    }) || _class);
-});
 define('text!app.html', ['module'], function(module) { module.exports = "<template><require from=\"nav-bar.html\"></require><div class=\"ui grid container page-host\"><section class=\"ui sixteen wide column\"><nav-bar router.bind=\"router\"></nav-bar></section><section class=\"ui sixteen wide column\"><router-view></router-view></section></div></template>"; });
 define('text!home.html', ['module'], function(module) { module.exports = "<template><require from=\"nav-bar.html\"></require><div class=\"ui grid container page-host\"><section class=\"ui sixteen wide column\"><nav-bar router.bind=\"router\"></nav-bar></section><section class=\"ui sixteen wide column\"><router-view></router-view></section></div></template>"; });
 define('text!nav-bar.html', ['module'], function(module) { module.exports = "<template bindable=\"router\"><nav class=\"ui menu\"><header class=\"header item\"><a href=\"/\">Tweets</a></header><div class=\"right menu\"><a repeat.for=\"row of router.navigation\" class=\"${row.isActive ?'active':''} item\" href.bind=\"row.href\">${row.title}</a></div></nav></template>"; });
+define('text!viewmodels/globalTimeline/globalTimeline.html', ['module'], function(module) { module.exports = "<template><section class=\"ui raised segment\"><div class=\"ui divided items\"><div repeat.for=\"tweet of tweets\" class=\"item\"><div class=\"ui tiny image\"><img src=\"${tweet.author.profileImage}\"></div><div class=\"content\"><div class=\"header\"><label> ${ tweet.author.firstName } ${ tweet.author.lastName } </label><div class=\"meta\">@${ tweet.author.userName } | ${ tweet.formattedDate }</div><div class=\"description\"><p>${ tweet.text }</p></div><div class=\"extra\"><div class=\"ui large bordered image\"><img src=\"${ tweet.postedImage }\"></div></div></div></div></div></div></section></template>"; });
 define('text!viewmodels/login/login.html', ['module'], function(module) { module.exports = "<template><form submit.trigger=\"login($event)\" class=\"ui stacked segment form\"><h3 class=\"ui header\">Log-in</h3><div class=\"field\"><label>Email</label><input placeholder=\"Email\" value.bind=\"email\"></div><div class=\"field\"><label>Password</label><input type=\"password\" value.bind=\"password\"></div><button class=\"ui blue submit button\">Login</button><h3>${prompt}</h3></form></template>"; });
 define('text!viewmodels/logout/logout.html', ['module'], function(module) { module.exports = "<template><form submit.delegate=\"logout($event)\" class=\"ui stacked segment form\"><h3 class=\"ui header\">Are you sure you want to log out?</h3><button class=\"ui blue submit button\">Logout</button></form></template>"; });
 define('text!viewmodels/profile/profile.html', ['module'], function(module) { module.exports = "<template><div class=\"ui four wide column\"><section class=\"ui card\"><div class=\"image\"><img src.bind=\"user.profileImage\"></div><div class=\"content\"><div class=\"header\"> ${user.firstName} ${user.lastName} </div><div class=\"meta\"><span>@${user.userName}</span></div><div class=\"description\"><p> ${user.description} </p></div></div></section></div></template>"; });
 define('text!viewmodels/signup/signup.html', ['module'], function(module) { module.exports = "<template><form submit.trigger=\"register()\" class=\"ui stacked fluid form segment\"><h3 class=\"ui header\">Register</h3><div class=\"two fields\"><div class=\"field\"><label>First Name</label><input placeholder=\"First Name\" type=\"text\" value.bind=\"firstName\"></div><div class=\"field\"><label>Last Name</label><input placeholder=\"Last Name\" type=\"text\" value.bind=\"lastName\"></div></div><div class=\"field\"><label>Email</label><input placeholder=\"Email\" type=\"text\" value.bind=\"userName\"></div><div class=\"field\"><label>Email</label><input placeholder=\"Email\" type=\"text\" value.bind=\"email\"></div><div class=\"field\"><label>Password</label><input type=\"password\" value.bind=\"password\"></div><button class=\"ui blue submit button\">Submit</button></form></template>"; });
 define('text!viewmodels/tweet/tweet.html', ['module'], function(module) { module.exports = "<template><form submit.trigger=\"postTweet()\" class=\"ui form raised segment\"><div class=\"field\"><label>Tweet to all your friends:</label><textarea rows=\"3\" value.bind=\"text\"></textarea></div><button class=\"ui blue submit button\">Tweet</button></form><form submit.trigger=\"deleteTweet()\" class=\"ui form raised segment\"><label>Your latest Tweets:</label><button type=\"submit\" class=\"ui submit button\">Delete Selected</button><div class=\"ui divided items\"><div repeat.for=\"tweet of tweets\" class=\"item\"><div class=\"ui tiny image\"><img src=\"${tweet.author.profileImage}\"></div><div class=\"content\"><div class=\"header\"><input type=\"radio\" name=\"tweets\" model.bind=\"tweet\" checked.bind=\"$parent.selectedOption\"><label> ${ tweet.author.firstName } ${ tweet.author.lastName } </label></div><div class=\"meta\">@${ tweet.author.userName } | ${ tweet.formattedDate }</div><div class=\"description\"><p>${ tweet.text }</p></div><div class=\"extra\"><div class=\"ui medium bordered image\"><img src=\"${tweet.postedImage}\"></div></div></div></div></div></form></template>"; });
-define('text!viewmodels/globalTimeline/globalTimeline.html', ['module'], function(module) { module.exports = "<template><section class=\"ui raised segment\"><div class=\"ui divided items\"><div repeat.for=\"tweet of tweets\" class=\"item\"><div class=\"ui tiny image\"><img src=\"${tweet.author.profileImage}\"></div><div class=\"content\"><div class=\"header\"><label> ${ tweet.author.firstName } ${ tweet.author.lastName } </label><div class=\"meta\">@${ tweet.author.userName } | ${ tweet.formattedDate }</div><div class=\"description\"><p>${ tweet.text }</p></div><div class=\"extra\"><div class=\"ui large bordered image\"><img src=\"${ tweet.postedImage }\"></div></div></div></div></div></div></section></template>"; });
 //# sourceMappingURL=app-bundle.js.map
